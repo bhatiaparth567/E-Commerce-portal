@@ -1,8 +1,20 @@
-import React from "react";
-import products from "../products";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import Product from "../components/Product";
 
 function Homescreen() {
+  const [products, setProducts] = useState([]);
+  //we cant make this arrow func async so inside make a new func
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/v1/products");
+      setProducts(data);
+    };
+    fetchProducts();
+  }, []);
+  //the 2nd param of useEffect is a list of dependencies
+
   return (
     <div>
       <div style={styles} className="products-list">
