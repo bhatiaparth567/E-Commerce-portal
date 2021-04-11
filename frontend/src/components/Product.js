@@ -2,10 +2,12 @@ import React from "react";
 import "./Product.css";
 import Rating from "./Rating.js";
 
+import { Link } from "react-router-dom";
+
 function Product({ product }) {
   return (
     <div>
-      <a href={`/product/${product._id}`}>
+      <Link to={`/product/${product._id}`}>
         <div className="product-container">
           <div className="product-image-container">
             <img className="product-image" src={product.image} />
@@ -26,7 +28,7 @@ function Product({ product }) {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }
