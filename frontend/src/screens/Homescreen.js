@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../actions/products";
-
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 import Product from "../components/Product";
 
 function Homescreen() {
@@ -17,11 +17,17 @@ function Homescreen() {
 
   return (
     <div>
-      <div style={styles} className="products-list">
-        {products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))}
-      </div>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <div style={styles} className="products-list">
+          {products.map((product) => (
+            <Product key={product._id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
