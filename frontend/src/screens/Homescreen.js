@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../actions/products";
 
 import Product from "../components/Product";
 
 function Homescreen() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  var { loading, products, error } = useSelector((state) => state.productsList);
+
   //we cant make this arrow func async so inside make a new func
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get("/api/v1/products");
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
   //the 2nd param of useEffect is a list of dependencies
 
   return (
