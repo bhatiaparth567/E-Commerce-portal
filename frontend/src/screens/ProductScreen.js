@@ -18,8 +18,7 @@ import Rating from "../components/Rating";
 import { fetchProduct } from "../actions/products";
 
 function ProductScreen(props) {
-  console.log(props);
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   //gting the requested product from url
   const dispatch = useDispatch();
@@ -96,23 +95,25 @@ function ProductScreen(props) {
                   <ListGroup.Item>
                     <Row>
                       <Col>
-                        <ListGroup.Item>
-                          <Row>
-                            <Col>Qty</Col>
-                            <Col>
-                              <Form.Control
-                                as="select"
-                                onChange={(e) => onQtyChangHandler(e)}
-                              >
-                                {[...Array(product.countInStock).keys()].map(
-                                  (x) => {
-                                    return <option key={x + 1}>{x + 1}</option>;
-                                  }
-                                )}
-                              </Form.Control>
-                            </Col>
-                          </Row>
-                        </ListGroup.Item>
+                        <Row>
+                          <Col>Qty:</Col>
+                          <Col>
+                            <Form.Control
+                              as="select"
+                              onChange={(e) => onQtyChangHandler(e)}
+                            >
+                              {[...Array(product.countInStock).keys()].map(
+                                (x) => {
+                                  return (
+                                    <option key={x + 1} value={x + 1}>
+                                      {x + 1}
+                                    </option>
+                                  );
+                                }
+                              )}
+                            </Form.Control>
+                          </Col>
+                        </Row>
                       </Col>
                     </Row>
                   </ListGroup.Item>

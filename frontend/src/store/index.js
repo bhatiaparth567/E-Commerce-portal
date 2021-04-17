@@ -6,10 +6,19 @@ import { logger } from "redux-logger";
 import reducers from "../reducers/index";
 
 let store;
-const middleware = [thunk, logger];
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
+const initialState = {
+  cart: { cartItems: cartItemsFromStorage },
+};
+const middleware = [thunk];
+
 export function configureStore() {
   store = createStore(
     reducers,
+    initialState,
     composeWithDevTools(applyMiddleware(...middleware))
   );
   return store;
