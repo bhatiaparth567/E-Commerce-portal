@@ -58,3 +58,8 @@ a {
   bottom: -2px;
   text-align: center;
 }
+@media (max-width: 600px) {
+  .product-container {
+    width: 400px;
+  }
+}
