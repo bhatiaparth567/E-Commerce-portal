@@ -13,7 +13,7 @@ import {
 
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import "./ProductScreen.css";
+
 import Rating from "../components/Rating";
 import { fetchProduct } from "../actions/products";
 
@@ -99,7 +99,9 @@ function ProductScreen(props) {
                           <Col>Qty:</Col>
                           <Col>
                             <Form.Control
+                              style={{ width: "auto" }}
                               as="select"
+                              value={qty}
                               onChange={(e) => onQtyChangHandler(e)}
                             >
                               {[...Array(product.countInStock).keys()].map(
