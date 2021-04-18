@@ -60,6 +60,6 @@ a {
 }
 @media (max-width: 600px) {
   .product-container {
-    width: 400px;
+    width: 80%;
   }
 }
