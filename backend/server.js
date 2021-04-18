@@ -6,6 +6,7 @@ const errorMiddleware = require("./middleware/error");
 
 dotenv.config();
 const app = express();
+app.use(express.json());
 
 app.use("/", require("./routes/index"));
 app.use(errorMiddleware.notFound);
