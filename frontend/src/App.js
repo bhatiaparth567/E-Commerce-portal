@@ -7,6 +7,7 @@ import LoginScreen from "./screens/LoginScreen";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import RegisterScreen from "./screens/RegisterScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             }
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/login" component={LoginScreen} exact />
+            <Route path="/register" component={RegisterScreen} exact />
           </Container>
         </main>
         <Footer />
