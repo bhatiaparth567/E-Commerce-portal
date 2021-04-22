@@ -8,6 +8,7 @@ import LoginScreen from "./screens/LoginScreen";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import RegisterScreen from "./screens/RegisterScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
               //? at the end to make it optional
             }
             <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/login" component={LoginScreen} exact />
-            <Route path="/register" component={RegisterScreen} exact />
+            <Route path="/login" component={LoginScreen} />
+            <Route path="/register" component={RegisterScreen} />
+            <Route path="/profile" component={ProfileScreen} />
           </Container>
         </main>
         <Footer />
