@@ -1,5 +1,10 @@
 import axios from "axios";
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "./actionTypes";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_PAYMENT_METHOD,
+  CART_SAVE_SHIPPING_ADDRESS,
+} from "./actionTypes";
 
 export function addItemToCart(id, qty) {
   return async function (dispatch, getState) {
@@ -40,5 +45,24 @@ export function removeItemFromCart(id) {
       "cartItems",
       JSON.stringify(getState().cart.cartItems)
     );
+  };
+}
+
+export function saveShippingAddress(data) {
+  return (dispatch) => {
+    dispatch({
+      type: CART_SAVE_SHIPPING_ADDRESS,
+      payload: data,
+    });
+    localStorage.setItem("shippingAddress", JSON.stringify(data));
+  };
+}
+export function savePaymentMethod(data) {
+  return (dispatch) => {
+    dispatch({
+      type: CART_SAVE_PAYMENT_METHOD,
+      payload: data,
+    });
+    localStorage.setItem("paymentMethod", JSON.stringify(data));
   };
 }
