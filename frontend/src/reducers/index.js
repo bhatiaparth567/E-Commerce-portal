@@ -7,6 +7,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from "./users";
+import { orderCreateReducer } from "./order";
 
 export default combineReducers({
   productsList,
@@ -16,4 +17,5 @@ export default combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  orderCreate: orderCreateReducer,
 });
