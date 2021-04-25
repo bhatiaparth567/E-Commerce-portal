@@ -85,3 +85,8 @@ module.exports.registerUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid user data");
   }
 });
+
+module.exports.getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  return res.status(200).json(users);
+});

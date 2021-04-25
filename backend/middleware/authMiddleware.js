@@ -24,3 +24,11 @@ module.exports.protect = asyncHandler(async function (req, res, next) {
     throw new Error("Not Authorized");
   }
 });
+
+module.exports.admin = asyncHandler(async function (req, res, next) {
+  if (req.user && req.user.isAdmin) next();
+  else {
+    res.status(401);
+    throw new Error("Unauthorized");
+  }
+});
