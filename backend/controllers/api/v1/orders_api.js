@@ -64,3 +64,8 @@ module.exports.updateOrderToPaid = asyncHandler(async (req, res) => {
     throw new Error("Order not found");
   }
 });
+
+module.exports.getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  return res.json(orders);
+});
