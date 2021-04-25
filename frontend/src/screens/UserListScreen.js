@@ -7,23 +7,27 @@ import { getUserDetails, updateUserProfile } from "../actions/users";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { USER_UPDATE_PROFILE_RESET } from "../actions/actionTypes";
-import { listUsers } from "../actions/users";
+import { listUsers, deleteUser } from "../actions/users";
 
 function UserListScreen({ history }) {
   const dispatch = useDispatch();
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) dispatch(listUsers());
     else history.replace("/login");
-  }, [dispatch, history]);
+  }, [dispatch, history, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log(id);
+    if (window.confirm("Are you sure?")) dispatch(deleteUser(id));
   };
   return (
     <div>
