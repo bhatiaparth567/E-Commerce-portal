@@ -77,7 +77,7 @@ module.exports.reviewProduct = asyncHandler(async (req, res) => {
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
-      (r) => r.user.id === req.user.id
+      (r) => r.user._id.toString() === req.user._id.toString()
     );
     if (alreadyReviewed) {
       res.status(400);

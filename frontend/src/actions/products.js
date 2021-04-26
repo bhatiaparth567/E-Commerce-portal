@@ -14,6 +14,9 @@ import {
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
+  REVIEW_CREATE_FAIL,
+  REVIEW_CREATE_REQUEST,
+  REVIEW_CREATE_SUCCESS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -147,6 +150,43 @@ export function updateProduct(product) {
     } catch (error) {
       dispatch({
         type: PRODUCT_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+}
+
+export function reviewProduct(id, review) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: REVIEW_CREATE_REQUEST,
+      });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.post(
+        `/api/v1/products/${id}/reviews`,
+        review,
+        config
+      );
+
+      dispatch({
+        type: REVIEW_CREATE_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: REVIEW_CREATE_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
