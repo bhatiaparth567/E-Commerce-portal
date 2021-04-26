@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 
 const db = require("./config/mongoose");
 const errorMiddleware = require("./middleware/error");
@@ -7,8 +8,9 @@ const errorMiddleware = require("./middleware/error");
 dotenv.config();
 const app = express();
 app.use(express.json());
-
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use("/", require("./routes/index"));
+
 app.use(errorMiddleware.notFound);
 app.use(errorMiddleware.errorHandler);
 
