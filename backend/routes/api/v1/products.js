@@ -12,6 +12,7 @@ router.post(
   productsController.createProduct
 );
 router.get("/:id", productsController.getProductsById);
+router.post("/:id/reviews", protect.protect, productsController.reviewProduct);
 router.delete(
   "/:id",
   protect.protect,
