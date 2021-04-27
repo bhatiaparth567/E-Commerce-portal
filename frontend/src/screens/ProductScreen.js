@@ -83,7 +83,7 @@ function ProductScreen(props) {
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+              <ListGroup.Item>Price: {product.price}</ListGroup.Item>
               <ListGroup.Item>
                 Description: {product.description}
               </ListGroup.Item>
@@ -96,10 +96,7 @@ function ProductScreen(props) {
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>
-                      <i className="fas fa-dollar-sign"> </i>
-                      {product.price}
-                    </Col>
+                    <Col>₹{product.price}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
