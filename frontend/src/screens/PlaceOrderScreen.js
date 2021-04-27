@@ -9,15 +9,16 @@ import { createOrder } from "../actions/orders";
 function PlaceOrderScreen({ history }) {
   const cart = useSelector((state) => state.cart);
 
-  cart.itemsPrice = cart.cartItems.reduce(
-    (acc, item) => acc + item.qty * item.price,
-    0
-  );
+  cart.itemsPrice = Number(
+    cart.cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)
+  ).toFixed(2);
   cart.shippingPrice = cart.itemsPrice > 499 ? 0 : 40;
   cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
 
-  cart.totalPrice = Number(
-    cart.itemsPrice + cart.shippingPrice + cart.taxPrice
+  cart.totalPrice = (
+    Number(cart.itemsPrice) +
+    Number(cart.shippingPrice) +
+    Number(cart.taxPrice)
   ).toFixed(2);
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function PlaceOrderScreen({ history }) {
   const { order, success, error } = orderCreate;
   useEffect(() => {
     if (success) history.push(`/order/${order._id}`);
-  }, [history, success]);
+  }, [history, success, order]);
   const placeOrderHandler = () => {
     dispatch(
       createOrder({

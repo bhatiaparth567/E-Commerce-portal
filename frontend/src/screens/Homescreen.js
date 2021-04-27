@@ -1,38 +1,51 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../actions/products";
+import { Row, Col } from "react-bootstrap";
+import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
-import Product from "../components/Product";
+import ProductCarousel from "../components/ProductCarousel";
+import { fetchProducts } from "../actions/products";
 
-function Homescreen({ match }) {
+const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
-  const pageNumber = match.params.pageNumber || 1;
-  const dispatch = useDispatch();
-  var { loading, products, error, page, pages } = useSelector(
-    (state) => state.productsList
-  );
 
-  //we cant make this arrow func async so inside make a new func
+  const pageNumber = match.params.pageNumber || 1;
+
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productsList);
+  const { loading, error, products, page, pages } = productList;
+
   useEffect(() => {
     dispatch(fetchProducts(keyword, pageNumber));
   }, [dispatch, keyword, pageNumber]);
-  //the 2nd param of useEffect is a list of dependencies
 
   return (
     <>
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go Back
+        </Link>
+      )}
+      <h1>Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <div style={styles} className="products-list">
+          <Row>
             {products.map((product) => (
-              <Product key={product._id} product={product} />
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
+              </Col>
             ))}
-          </div>
+          </Row>
           <Paginate
             pages={pages}
             page={page}
@@ -42,12 +55,6 @@ function Homescreen({ match }) {
       )}
     </>
   );
-}
-
-const styles = {
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-between",
 };
 
-export default Homescreen;
+export default HomeScreen;

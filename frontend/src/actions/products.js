@@ -11,6 +11,9 @@ import {
   PRODUCT_LIST_FAILED,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
+  PRODUCT_TOP_FAIL,
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
@@ -177,11 +180,7 @@ export function reviewProduct(id, review) {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.post(
-        `/api/v1/products/${id}/reviews`,
-        review,
-        config
-      );
+      await axios.post(`/api/v1/products/${id}/reviews`, review, config);
 
       dispatch({
         type: REVIEW_CREATE_SUCCESS,
@@ -189,6 +188,24 @@ export function reviewProduct(id, review) {
     } catch (error) {
       dispatch({
         type: REVIEW_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+}
+
+export function listTopProducts() {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: PRODUCT_TOP_REQUEST });
+      const { data } = await axios.get(`/api/v1/products/top`);
+      dispatch({ type: PRODUCT_TOP_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_TOP_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

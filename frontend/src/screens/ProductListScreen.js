@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form, Row, Col, Table } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Button, Row, Col, Table } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails, updateUserProfile } from "../actions/users";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 
-import {
-  PRODUCT_CREATE_RESET,
-  USER_UPDATE_PROFILE_RESET,
-} from "../actions/actionTypes";
+import { PRODUCT_CREATE_RESET } from "../actions/actionTypes";
 import {
   fetchProducts,
   deleteProduct,

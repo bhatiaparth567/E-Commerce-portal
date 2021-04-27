@@ -13,7 +13,7 @@ function CartTotal({ cartItems, history }) {
             Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
             items
           </h4>
-          $
+          ₹
           {cartItems
             .reduce((acc, item) => acc + item.qty * item.price, 0)
             .toFixed(2)}

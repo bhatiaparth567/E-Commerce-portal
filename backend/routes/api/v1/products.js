@@ -11,6 +11,7 @@ router.post(
   protect.admin,
   productsController.createProduct
 );
+router.get("/top", productsController.getTopProducts);
 router.get("/:id", productsController.getProductsById);
 router.post("/:id/reviews", protect.protect, productsController.reviewProduct);
 router.delete(
@@ -25,5 +26,4 @@ router.put(
   protect.admin,
   productsController.updateProduct
 );
-
 module.exports = router;

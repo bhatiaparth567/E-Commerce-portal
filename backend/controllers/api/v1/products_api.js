@@ -3,7 +3,7 @@ const { findById } = require("../../../models/product");
 const Product = require("../../../models/product");
 
 module.exports.getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 8;
   const page = req.query.pageNumber ? Number(req.query.pageNumber) : 1;
   const keyword = req.query.keyword
     ? {
@@ -112,4 +112,10 @@ module.exports.reviewProduct = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product Not Found");
   }
+});
+
+module.exports.getTopProducts = asyncHandler(async (req, res) => {
+  //sort asc
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4);
+  res.json(products);
 });

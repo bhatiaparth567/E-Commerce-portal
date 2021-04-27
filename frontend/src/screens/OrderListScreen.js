@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form, Row, Col, Table } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Button, Table } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails, updateUserProfile } from "../actions/users";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { USER_UPDATE_PROFILE_RESET } from "../actions/actionTypes";
 import { listOrders } from "../actions/orders";
 
 function OrderListScreen({ history }) {
