@@ -20,11 +20,13 @@ import {
 } from "./actionTypes";
 import axios from "axios";
 
-export function fetchProducts() {
+export function fetchProducts(keyword = "", pageNumber = "") {
   return async function (dispatch) {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get("/api/v1/products");
+      const { data } = await axios.get(
+        `/api/v1/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
